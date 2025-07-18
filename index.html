@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Бази — уютная пиццерия</title>
+  <meta name="description" content="Пиццерия Бази — домашний уют, вкусная пицца, кофе и прохладительные напитки. Место, куда хочется вернуться!">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --main-green: #4e6b4e;
+      --main-brown: #a97c50;
+      --main-dark: #2d2320;
+      --main-gray: #2c2623;
+      --accent: #4e3a2a;
+      --warm-gradient: linear-gradient(135deg, #3e2c23 0%, #a97c50 100%);
+      --card-gradient: linear-gradient(120deg, #4e3a2a 60%, #a97c50 100%);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: var(--warm-gradient);
+      color: #f5e9e0;
+      scroll-behavior: smooth;
+      transition: background 0.7s;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      z-index: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('XXXL.webp') center center/cover no-repeat;
+      filter: brightness(0.45) blur(6px) sepia(0.08) contrast(1.08) saturate(1.1);
+      opacity: 0.92;
+      transition: background 0.7s, filter 0.7s;
+    }
+    body, html { position: relative; z-index: 1; }
+    main, header, .fixed-nav, .fixed-contacts, .footer { position: relative; z-index: 2; }
+    .gallery-section {
+      margin: 48px auto 0 auto;
+      max-width: 950px;
+      padding: 24px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .gallery-title {
+      font-size: 1.3rem;
+      color: var(--main-brown);
+      font-weight: 700;
+      margin-bottom: 18px;
+      text-shadow: 0 2px 12px #2d2320;
+    }
+    .gallery-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .gallery-img {
+      border-radius: 18px;
+      box-shadow: 0 4px 32px rgba(45,35,32,0.18);
+      max-width: 320px;
+      max-height: 220px;
+      object-fit: cover;
+      filter: brightness(0.93) sepia(0.08) contrast(1.08) saturate(1.1);
+      transition: filter 0.4s, transform 0.3s;
+      margin-bottom: 18px;
+    }
+    .gallery-img:hover {
+      filter: brightness(1.05) sepia(0.03) contrast(1.12) saturate(1.18);
+      transform: scale(1.04) rotate(-1deg);
+    }
+    .fixed-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      background: rgba(45,35,32,0.72);
+      z-index: 1000;
+      box-shadow: 0 2px 12px rgba(45,35,32,0.10);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 60px;
+      transition: background 0.3s;
+      backdrop-filter: blur(6px);
+    }
+    .fixed-nav nav {
+      margin: 0;
+      gap: 0;
+    }
+    .fixed-nav nav a {
+      background: none;
+      color: #f5e9e0;
+      font-weight: 600;
+      font-size: 1.08rem;
+      border-radius: 0;
+      padding: 0 32px;
+      height: 60px;
+      line-height: 60px;
+      border-bottom: 3px solid transparent;
+      transition: color 0.2s, border-bottom 0.2s, background 0.2s;
+      position: relative;
+      text-shadow: 0 1px 0 #2d2320;
+    }
+    .fixed-nav nav a:hover,
+    .fixed-nav nav a.active {
+      color: var(--main-brown);
+      border-bottom: 3px solid var(--main-brown);
+      background: rgba(169,124,80,0.08);
+    }
+    header {
+      background: var(--card-gradient);
+      color: #fff;
+      padding: 100px 0 30px 0;
+      text-align: center;
+      box-shadow: 0 4px 32px rgba(45,35,32,0.18);
+      border-bottom-left-radius: 32px;
+      border-bottom-right-radius: 32px;
+      transition: background 0.7s;
+    }
+    .logo {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      opacity: 0;
+      animation: fadeInLogo 1.2s 0.1s forwards;
+    }
+    .subtitle {
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 10px;
+      opacity: 0;
+      animation: fadeInLogo 1.2s 0.3s forwards;
+    }
+    .worktime {
+      font-size: 1rem;
+      margin-bottom: 0;
+      opacity: 0;
+      animation: fadeInLogo 1.2s 0.5s forwards;
+    }
+    nav {
+      margin: 30px 0 0 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    nav a {
+      background: var(--main-brown);
+      color: var(--main-dark);
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      /* Добавим небольшое увеличение при наведении */
+    }
+    nav a:hover {
+      background: var(--main-green);
+      color: #fff;
+      transform: scale(1.07);
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto 0 auto;
+      background: linear-gradient(135deg, #23382d 60%, #2e4a3a 100%);
+      border-radius: 32px;
+      box-shadow: 0 8px 48px rgba(45,35,32,0.22);
+      padding: 32px 24px 24px 24px;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInUp 1s forwards;
+      transition: background 0.7s, box-shadow 0.7s;
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+    }
+    .container::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: url('XXXL.webp') center center/cover no-repeat;
+      filter: brightness(0.45) blur(6px) sepia(0.08) contrast(1.08) saturate(1.1);
+      opacity: 0.38;
+      border-radius: 32px;
+      transition: opacity 0.7s, filter 0.7s;
+    }
+    .container > * { position: relative; z-index: 1; }
+    .gallery-section {
+      z-index: 2;
+      position: relative;
+      margin: 40px auto 0 auto;
+      background: linear-gradient(135deg, #23382d 60%, #2e4a3a 100%);
+      border-radius: 32px;
+      box-shadow: 0 8px 48px rgba(45,35,32,0.22);
+      padding: 24px 0 0 0;
+    }
+    @media (max-width: 700px) {
+      .container, .gallery-section { border-radius: 16px; }
+      .container, .gallery-section { margin: 24px auto 0 auto; }
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--main-brown);
+      margin-bottom: 18px;
+      text-align: center;
+      text-shadow: 0 2px 12px #2d2320;
+    }
+    .desc {
+      font-size: 1.1rem;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #f5e9e0;
+      text-shadow: 0 1px 8px #2d2320;
+    }
+    .info-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+    .info-item {
+      background: linear-gradient(120deg, #4e3a2a 60%, #a97c50 100%);
+      border-radius: 14px;
+      padding: 18px 24px;
+      min-width: 220px;
+      text-align: center;
+      font-size: 1rem;
+      box-shadow: 0 2px 12px rgba(45,35,32,0.13);
+      opacity: 0;
+      transform: scale(0.95);
+      animation: fadeInInfo 0.7s forwards;
+      animation-delay: 0.7s;
+      color: #f5e9e0;
+      transition: background 0.7s;
+    }
+    .info-item:nth-child(2) { animation-delay: 0.8s; }
+    .info-item:nth-child(3) { animation-delay: 0.9s; }
+    .info-item:nth-child(4) { animation-delay: 1s; }
+    @keyframes fadeInInfo {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    .contacts {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .contacts a {
+      color: var(--main-green);
+      text-decoration: none;
+      font-weight: 600;
+      margin: 0 8px;
+      transition: color 0.2s;
+    }
+    .contacts a:hover {
+      color: var(--main-brown);
+    }
+    .delivery-links {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin: 18px 0 0 0;
+      flex-wrap: wrap;
+    }
+    .delivery-links a {
+      background: var(--main-green);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+    .delivery-links a:hover {
+      background: var(--main-brown);
+      color: var(--main-dark);
+      transform: scale(1.08) rotate(-2deg);
+    }
+    .footer {
+      text-align: center;
+      color: #888;
+      font-size: 0.95rem;
+      margin: 40px 0 10px 0;
+    }
+    @media (max-width: 600px) {
+      .container { padding: 16px 4px; }
+      .info-list { flex-direction: column; gap: 16px; }
+      .fixed-nav nav a { padding: 0 12px; font-size: 0.98rem; }
+      header { padding-top: 80px; }
+    }
+    .pizza-menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+      margin-top: 24px;
+    }
+    .pizza-card {
+      background: linear-gradient(120deg, #4e3a2a 60%, #a97c50 100%);
+      border-radius: 16px;
+      box-shadow: 0 2px 16px rgba(45,35,32,0.13);
+      padding: 22px 18px 18px 18px;
+      min-width: 240px;
+      max-width: 270px;
+      flex: 1 1 240px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+      transition: transform 0.18s, box-shadow 0.18s, background 0.7s;
+      color: #f5e9e0;
+    }
+    .pizza-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 8px 32px rgba(169,124,80,0.18);
+      background: linear-gradient(120deg, #a97c50 60%, #4e3a2a 100%);
+    }
+    .pizza-image {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .pizza-title {
+      font-size: 1.13rem;
+      font-weight: 700;
+      color: var(--main-brown);
+      margin-bottom: 6px;
+      text-shadow: 0 1px 8px #2d2320;
+    }
+    .pizza-desc {
+      font-size: 0.98rem;
+      color: #f5e9e0;
+      margin-bottom: 8px;
+      opacity: 0.85;
+    }
+    .pizza-weight {
+      font-size: 0.93rem;
+      color: #e0c7b0;
+      margin-bottom: 8px;
+    }
+    .pizza-price {
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0;
+      text-shadow: 0 1px 8px #2d2320;
+    }
+    
+    /* Стили для карточек напитков */
+    .drinks-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .drink-card {
+      background: linear-gradient(120deg, #4e3a2a 60%, #a97c50 100%);
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(45,35,32,0.13);
+      padding: 12px 16px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      transition: transform 0.18s, box-shadow 0.18s, background 0.7s;
+      color: #f5e9e0;
+    }
+    
+    .drink-card:hover {
+      transform: translateX(4px);
+      box-shadow: 0 6px 24px rgba(169,124,80,0.18);
+      background: linear-gradient(120deg, #a97c50 60%, #4e3a2a 100%);
+    }
+    
+    .drink-info {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    
+    .drink-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--main-brown);
+      margin-bottom: 2px;
+      text-shadow: 0 1px 6px #2d2320;
+    }
+    
+    .drink-desc {
+      font-size: 0.85rem;
+      color: #f5e9e0;
+      margin-bottom: 2px;
+      opacity: 0.85;
+    }
+    
+    .drink-volume {
+      font-size: 0.8rem;
+      color: #e0c7b0;
+    }
+    
+    .drink-price {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      text-shadow: 0 1px 6px #2d2320;
+      margin-left: 12px;
+    }
+    .fixed-contacts {
+      position: fixed;
+      top: 16px;
+      right: 24px;
+      z-index: 1200;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+    .fixed-contacts .contacts-box {
+      background: rgba(45,35,32,0.97);
+      border-radius: 14px;
+      box-shadow: 0 2px 12px rgba(45,35,32,0.13);
+      padding: 14px 18px 10px 18px;
+      color: #f5e9e0;
+      font-size: 1rem;
+      margin-bottom: 4px;
+      min-width: 210px;
+      text-align: right;
+      transition: background 0.3s;
+    }
+    .fixed-contacts .contacts-box a {
+      color: var(--main-brown);
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 8px;
+      transition: color 0.2s;
+    }
+    .fixed-contacts .contacts-box a:hover {
+      color: #fff;
+    }
+    .fixed-contacts .delivery-links {
+      display: flex;
+      gap: 8px;
+      margin: 0;
+    }
+    .fixed-contacts .delivery-links a {
+      background: var(--main-brown);
+      color: #fff;
+      padding: 7px 16px;
+      border-radius: 18px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.98rem;
+      box-shadow: 0 2px 8px rgba(45,35,32,0.10);
+      transition: background 0.2s, color 0.2s, transform 0.18s;
+      display: flex;
+      align-items: center;
+    }
+    .fixed-contacts .delivery-links a:hover {
+      background: #fff;
+      color: var(--main-brown);
+      transform: scale(1.07);
+    }
+    .fixed-contacts .worktime {
+      font-size: 0.97em;
+      color: #e0c7b0;
+      opacity: 0.85;
+      margin-top: 2px;
+      text-align: right;
+    }
+    @media (max-width: 700px) {
+      .fixed-contacts { right: 4px; top: 4px; }
+      .fixed-contacts .contacts-box { min-width: 140px; font-size: 0.93rem; padding: 8px 8px 6px 8px; }
+      .fixed-contacts .delivery-links a { padding: 6px 8px; font-size: 0.93rem; }
+    }
+    
+    /* Закрепленная надпись в правом нижнем углу */
+    .fixed-quote {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, rgba(35,56,45,0.95) 60%, rgba(46,74,58,0.95) 100%);
+      color: var(--main-brown);
+      padding: 16px 20px;
+      border-radius: 16px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(45,35,32,0.3);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      max-width: 280px;
+      line-height: 1.4;
+      border: 1px solid rgba(169,124,80,0.2);
+    }
+    
+    @media (max-width: 700px) {
+      .fixed-quote {
+        bottom: 10px;
+        right: 10px;
+        padding: 12px 16px;
+        font-size: 0.9rem;
+        max-width: 240px;
+      }
+    }
+    
+    /* Стили для отзывов */
+    .reviews-section {
+      background: linear-gradient(135deg, #23382d 60%, #2e4a3a 100%);
+      border-radius: 32px;
+      box-shadow: 0 8px 48px rgba(45,35,32,0.22);
+      padding: 32px 24px 24px 24px;
+      margin: 40px auto 0 auto;
+      max-width: 900px;
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+    }
+    .reviews-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: url('XXXL.webp') center center/cover no-repeat;
+      filter: brightness(0.45) blur(6px) sepia(0.08) contrast(1.08) saturate(1.1);
+      opacity: 0.38;
+      border-radius: 32px;
+      transition: opacity 0.7s, filter 0.7s;
+    }
+    .reviews-section > * { position: relative; z-index: 1; }
+    
+    .reviews-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--main-brown);
+      margin-bottom: 24px;
+      text-align: center;
+      text-shadow: 0 2px 12px #2d2320;
+    }
+    
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+    
+    .review-card {
+      background: linear-gradient(120deg, #4e3a2a 60%, #a97c50 100%);
+      border-radius: 20px;
+      padding: 24px 20px;
+      color: #f5e9e0;
+      box-shadow: 0 4px 20px rgba(45,35,32,0.15);
+      transition: transform 0.3s, box-shadow 0.3s, background 0.7s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .review-card::before {
+      content: '"';
+      position: absolute;
+      top: 8px;
+      left: 16px;
+      font-size: 3rem;
+      color: var(--main-brown);
+      opacity: 0.3;
+      font-family: serif;
+    }
+    
+    .review-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(169,124,80,0.2);
+      background: linear-gradient(120deg, #a97c50 60%, #4e3a2a 100%);
+    }
+    
+    .review-text {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .review-rating {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    
+    .stars {
+      display: flex;
+      gap: 2px;
+    }
+    
+    .star {
+      color: #ffd700;
+      font-size: 1.1rem;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+    
+    .rating-text {
+      font-weight: 600;
+      color: var(--main-brown);
+      font-size: 0.9rem;
+    }
+    
+    @media (max-width: 700px) {
+      .reviews-section { 
+        border-radius: 16px; 
+        margin: 24px auto 0 auto;
+        padding: 24px 16px 16px 16px;
+      }
+      .reviews-section::before { border-radius: 16px; }
+      .reviews-grid { grid-template-columns: 1fr; gap: 16px; }
+      .review-card { padding: 20px 16px; }
+    }
+    .welcome-block {
+      width: 100%;
+      max-width: 100vw;
+      margin: 0 auto 20px auto;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      position: relative;
+      z-index: 3;
+    }
+    .welcome-content {
+      position: relative;
+      background: linear-gradient(135deg, #23382d 60%, #2e4a3a 100%);
+      border-radius: 32px;
+      box-shadow: 0 8px 48px rgba(45,35,32,0.22);
+      padding: 32px 38px 28px 38px;
+      max-width: 700px;
+      margin: 10px auto 0 auto;
+      color: #f5e9e0;
+      text-align: center;
+      font-size: 1.13rem;
+      line-height: 1.7;
+      transition: background 0.7s;
+      overflow: hidden;
+    }
+    .welcome-content::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: url('XXXL.webp') center center/cover no-repeat;
+      filter: brightness(0.45) blur(6px) sepia(0.08) contrast(1.08) saturate(1.1);
+      opacity: 0.38;
+      border-radius: 32px;
+      transition: opacity 0.7s, filter 0.7s;
+    }
+    .welcome-content > * {
+      position: relative;
+      z-index: 1;
+    }
+    .welcome-title {
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: var(--main-brown);
+      margin-bottom: 18px;
+      text-shadow: 0 2px 12px #2d2320;
+    }
+    .welcome-desc b {
+      color: var(--main-brown);
+      font-weight: 700;
+    }
+    .welcome-section {
+      margin: 28px 0 0 0;
+    }
+    .welcome-subtitle {
+      color: var(--main-brown);
+      font-size: 1.13rem;
+      font-weight: 700;
+      margin-bottom: 7px;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 8px #2d2320;
+    }
+    @media (max-width: 700px) {
+      .welcome-content { padding: 18px 6px 16px 6px; font-size: 1.01rem; border-radius: 16px; }
+      .welcome-content::before { border-radius: 16px; }
+      .welcome-title { font-size: 1.25rem; }
+    }
+    .logo-bar {
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: none;
+      padding-top: 20px;
+      padding-bottom: 10px;
+      z-index: 1100;
+      position: relative;
+    }
+    .site-logo {
+      max-width: 240px;
+      max-height: 180px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 0;
+      box-shadow: none;
+      background: none;
+      margin-bottom: 2px;
+    }
+    .section-animate {
+      opacity: 0;
+      transform: translateY(60px) scale(0.98);
+      box-shadow: 0 8px 48px rgba(45,35,32,0.12);
+      transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1), box-shadow 0.5s;
+      z-index: 2;
+    }
+    .section-animate.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1.03);
+      box-shadow: 0 16px 64px 0 rgba(45,35,32,0.28), 0 0 0 2px rgba(169,124,80,0.08);
+    }
+    /* Анимация для карточек меню и галереи */
+    .stagger-animate {
+      opacity: 0;
+      transform: translateY(40px) scale(0.97);
+      transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+    }
+    .stagger-animate.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    /* Анимация для заголовков */
+    .section-title, .gallery-title, .welcome-title {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+    }
+    .section-title.visible, .gallery-title.visible, .welcome-title.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* --- Слайдер/баннер --- */
+    .hero-banner {
+      width: 100vw;
+      min-height: 420px;
+      max-height: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: url('XXXL.webp') center center/cover no-repeat;
+      box-shadow: 0 8px 48px rgba(45,35,32,0.22);
+      overflow: hidden;
+      z-index: 2;
+    }
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(35,56,45,0.82) 60%, rgba(46,74,58,0.92) 100%);
+      z-index: 1;
+    }
+    .hero-logo {
+      position: relative;
+      z-index: 2;
+      margin-bottom: 18px;
+      max-width: 320px;
+      width: 100%;
+      filter: drop-shadow(0 4px 24px #0008);
+      opacity: 0;
+      transform: scale(0.85);
+      animation: heroLogoIn 1.2s 0.2s cubic-bezier(.4,0,.2,1) forwards;
+    }
+    @keyframes heroLogoIn {
+      to { opacity: 1; transform: scale(1); }
+    }
+    .hero-title {
+      position: relative;
+      z-index: 2;
+      color: #f5e9e0;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.7rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-align: center;
+      margin-bottom: 12px;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: heroTitleIn 1.2s 0.5s cubic-bezier(.4,0,.2,1) forwards;
+      text-shadow: 0 4px 32px #000a;
+    }
+    @keyframes heroTitleIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-desc {
+      position: relative;
+      z-index: 2;
+      color: #e0c7b0;
+      font-size: 1.25rem;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: heroDescIn 1.2s 0.9s cubic-bezier(.4,0,.2,1) forwards;
+      text-shadow: 0 2px 12px #000a;
+    }
+    @keyframes heroDescIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 700px) {
+      .hero-title { font-size: 1.3rem; }
+      .hero-banner { min-height: 220px; }
+      .hero-logo { max-width: 180px; }
+    }
+
+    /* --- Lightbox галереи --- */
+    .gallery-img { cursor: pointer; transition: filter 0.4s, transform 0.3s, box-shadow 0.3s; }
+    .gallery-img:active { filter: brightness(1.1) saturate(1.2); box-shadow: 0 8px 32px #0006; }
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(20,30,20,0.92);
+      align-items: center;
+      justify-content: center;
+      animation: fade .5s;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 18px;
+      box-shadow: 0 8px 48px #000a;
+      background: #222;
+      animation: fade .7s;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 32px; right: 48px;
+      font-size: 2.5rem;
+      color: #fff;
+      cursor: pointer;
+      z-index: 10001;
+      background: none;
+      border: none;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .lightbox-close:hover { opacity: 1; }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+    /* --- Кнопки --- */
+    .btn-premium {
+      display: inline-block;
+      padding: 12px 32px;
+      border-radius: 24px;
+      border: 2px solid #e0c7b0;
+      background: transparent;
+      color: #e0c7b0;
+      font-size: 1.08rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+      box-shadow: 0 2px 12px rgba(45,35,32,0.10);
+      margin: 8px 8px 0 0;
+      cursor: pointer;
+    }
+    .btn-premium:hover {
+      background: #e0c7b0;
+      color: #23382d;
+      box-shadow: 0 4px 24px #e0c7b0aa;
+    }
+
+    /* --- Параллакс для галереи --- */
+    .gallery-section {
+      background: linear-gradient(135deg, #23382d 60%, #2e4a3a 100%);
+      border-radius: 32px;
+      box-shadow: 0 8px 48px rgba(45,35,32,0.22);
+      padding: 24px 0 0 0;
+      margin: 40px auto 0 auto;
+      z-index: 2;
+      position: relative;
+      overflow: hidden;
+    }
+    .gallery-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: url('XXXL.webp') center center/cover no-repeat;
+      filter: brightness(0.45) blur(6px) sepia(0.08) contrast(1.08) saturate(1.1);
+      opacity: 0.38;
+      border-radius: 32px;
+      transition: opacity 0.7s, filter 0.7s;
+    }
+    .gallery-section > * { position: relative; z-index: 1; }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM загружен');
+      setTimeout(function() {
+        document.getElementById('preloader').classList.add('hide');
+        setTimeout(function() {
+          document.getElementById('preloader').style.display = 'none';
+        }, 700);
+      }, 1700); // Время показа прелоадера (мс)
+    });
+    // Плавная подсветка активной кнопки меню при скролле
+    document.addEventListener('DOMContentLoaded', function() {
+      const navLinks = document.querySelectorAll('.fixed-nav nav a');
+      const sections = Array.from(navLinks).map(link => document.querySelector(link.getAttribute('href')));
+      
+      console.log('Найдено ссылок навигации:', navLinks.length);
+      console.log('Найдено секций:', sections.length);
+      
+      // Плавный скролл при клике
+      navLinks.forEach((link, index) => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          console.log('Клик по ссылке:', this.getAttribute('href'));
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            console.log('Найдена цель для скролла:', target.id);
+            window.scrollTo({ top: target.offsetTop - 55, behavior: 'smooth' });
+          } else {
+            console.log('Цель не найдена:', this.getAttribute('href'));
+          }
+        });
+      });
+      
+      function onScroll() {
+        let scrollPos = window.scrollY + 70;
+        let found = false;
+        for (let i = sections.length - 1; i >= 0; i--) {
+          if (sections[i] && scrollPos >= sections[i].offsetTop) {
+            navLinks.forEach(l => l.classList.remove('active'));
+            navLinks[i].classList.add('active');
+            found = true;
+            break;
+          }
+        }
+        if (!found) navLinks.forEach(l => l.classList.remove('active'));
+      }
+      window.addEventListener('scroll', onScroll);
+      onScroll();
+    });
+    // Intersection Observer + scroll effect для выплывания секций
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = Array.from(document.querySelectorAll('.container, .gallery-section, .reviews-section'));
+      // Анимация появления
+      const observer = new window.IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15 });
+      sections.forEach(el => {
+        el.classList.remove('visible'); // Убираем видимость по умолчанию
+        el.classList.add('section-animate');
+        observer.observe(el);
+      });
+      // Удаляем эффект постоянного наложения
+    });
+    // Intersection Observer для секций и заголовков
+    document.addEventListener('DOMContentLoaded', function() {
+      // Секции
+      const sections = Array.from(document.querySelectorAll('.container, .gallery-section, .reviews-section'));
+      const observer = new window.IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15 });
+      sections.forEach(el => {
+        el.classList.remove('visible');
+        el.classList.add('section-animate');
+        observer.observe(el);
+      });
+      // Заголовки
+      document.querySelectorAll('.section-title, .gallery-title, .welcome-title, .reviews-title').forEach(el => {
+        observer.observe(el);
+      });
+      // Staggered анимация для карточек меню и галереи
+      function staggerCards(selector) {
+        const cards = document.querySelectorAll(selector);
+        const cardObserver = new window.IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const visibleCards = Array.from(cards);
+              visibleCards.forEach((card, idx) => {
+                setTimeout(() => card.classList.add('visible'), idx * 120);
+              });
+              cardObserver.disconnect();
+            }
+          });
+        }, { threshold: 0.15 });
+        if (cards.length) cardObserver.observe(cards[0]);
+      }
+      staggerCards('.pizza-card');
+      staggerCards('.gallery-img');
+      staggerCards('.review-card');
+      staggerCards('.drink-card');
+    });
+    // Lightbox для галереи
+    document.addEventListener('DOMContentLoaded', function() {
+      const imgs = document.querySelectorAll('.gallery-img');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxClose = document.getElementById('lightboxClose');
+      imgs.forEach(img => {
+        img.addEventListener('click', function() {
+          lightbox.classList.add('active');
+          lightboxImg.src = this.src;
+        });
+      });
+      lightboxClose.addEventListener('click', function() {
+        lightbox.classList.remove('active');
+        lightboxImg.src = '';
+      });
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+          lightbox.classList.remove('active');
+          lightboxImg.src = '';
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <div id="preloader" style="position:fixed;z-index:9999;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(62,62,62,0.97);transition:opacity 0.7s;">
+    <div style="text-align:center;width:100vw;">
+      <span class="preloader-title">Пиццерия Бази</span>
+      <div style="margin-top:30px;">
+        <span style="display:inline-block;width:60px;height:6px;border-radius:3px;background:#6ba36b;animation:preloaderBar 1.2s infinite alternate;"></span>
+      </div>
+    </div>
+  </div>
+  <style>
+    #preloader.hide { opacity: 0; pointer-events: none; transition: opacity 0.7s; }
+    @keyframes preloaderText {
+      0% { letter-spacing: 2px; filter: brightness(1); }
+      100% { letter-spacing: 8px; filter: brightness(1.2); }
+    }
+    @keyframes preloaderBar {
+      0% { width: 60px; background: #6ba36b; }
+      100% { width: 120px; background: #bfae9e; }
+    }
+    .preloader-title {
+      display: inline-block;
+      font-family: 'Pacifico', cursive;
+      font-size: 2.7rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      color: #fff;
+      text-shadow: 0 4px 24px #6ba36b,0 1px 0 #3e3e3e;
+      animation: preloaderText 1.2s infinite alternate;
+    }
+  </style>
+  <div class="fixed-nav">
+    <nav>
+      <a href="#about" onclick="console.log('Клик по О нас');">О нас</a>
+      <a href="#menu" onclick="console.log('Клик по Меню');">Меню</a>
+      <a href="#delivery" onclick="console.log('Клик по Доставка');">Доставка</a>
+    </nav>
+  </div>
+          <div class="logo-bar">
+            <img src="51cceaf5-e774-43be-b47d-a4b329fa22333bd6.png" alt="Логотип Бази" class="site-logo" />
+        </div>
+  <!-- header удалён, чтобы убрать коричневую полоску -->
+  <main>
+    <section class="welcome-block">
+      <div class="welcome-content">
+        <h1 class="welcome-title">Добро пожаловать в пиццерию «Бази»!</h1>
+        <div class="welcome-desc">
+          <div>Находимся в Москве, на улице Расковой, 12, и приглашаем вас насладиться атмосферой домашнего уюта и вкусной пиццы в самом сердце города! Мы предлагаем вам не просто место для перекуса, а уголок, куда хочется вернуться снова и снова. Каждое посещение — это как глоток свежего воздуха, сочетание комфортной обстановки и вкусной еды. Насладитесь пиццей, кофе и освежающими напитками, которые идеально подойдут как для тихого вечера, так и для встреч с друзьями.</div>
+          <div style="margin: 18px 0 0 0;">А если вы не можете заглянуть к нам, не беда! Вы всегда можете <a href="#delivery" style="color: var(--main-brown); text-decoration: none; font-weight: 600;">заказать</a> нашу прекрасную пиццу на дом и насладиться ею в удобной атмосфере вашего дома.</div>
+        </div>
+      </div>
+    </section>
+    <div class="container" id="about">
+      <div class="section-title">Место, куда хочется вернуться</div>
+      <div class="desc">Пиццерия «Бази» — это уютная атмосфера, ароматная пицца, свежий кофе и прохладительные напитки. Здесь всегда тепло, вкусно и по-домашнему. Мы рады всем гостям!</div>
+      <div class="info-list">
+        <div class="info-item"><b>Адрес:</b><br>Москва, ул. Расковой, 12</div>
+        <div class="info-item"><b>Средний чек:</b><br>1000 ₽</div>
+        <div class="info-item"><b>Wi-Fi:</b><br>Бесплатно</div>
+      </div>
+      <div class="desc" style="margin-top:32px; font-size:1.15rem; opacity:0.92;">Мы создаём атмосферу, в которую хочется возвращаться снова и снова. Уютные залы, мягкий свет, тёплые цвета и забота о каждом госте — всё для вашего комфорта и хорошего настроения.</div>
+    </div>
+    <div class="container" id="advantages" style="margin-top:32px;">
+      <div class="section-title">Наши преимущества</div>
+      <div class="info-list">
+        <div class="info-item"><b>Высокое качество</b><br>Только свежие ингредиенты и проверенные поставщики.</div>
+        <div class="info-item"><b>Уютная атмосфера</b><br>Тёплый интерьер, мягкий свет, приятная музыка.</div>
+        <div class="info-item"><b>Для всех</b><br>Идеально для семей, встреч с друзьями и уединённых вечеров.</div>
+      </div>
+    </div>
+    <div class="container" id="menu">
+      <div class="section-title">Меню</div>
+      <div class="desc">Пицца на тонком тесте, свежий кофе и прохладительные напитки.</div>
+      <div class="pizza-menu">
+        <div class="pizza-card stagger-animate">
+          <img src="Пепперони на тонком тесте.jpg" alt="Пицца Пепперони" class="pizza-image" loading="lazy" />
+          <div class="pizza-title">Пицца Пепперони 32 см</div>
+          <div class="pizza-desc">Соус Неаполитанский, сыр моцарелла, колбаса пепперони, помидоры черри</div>
+          <div class="pizza-weight">550 г</div>
+          <div class="pizza-price">700 ₽</div>
+        </div>
+        <div class="pizza-card stagger-animate">
+          <img src="Дьябло острая.jpg" alt="Пицца Диабло (острая)" class="pizza-image" loading="lazy" />
+          <div class="pizza-title">Пицца Диабло (острая) 32 см</div>
+          <div class="pizza-desc">Соус Неаполитанский, моцарелла, бекон, перец халопеньо, колбаски охотничьи, пепперони, фасоль красная, красный лук, перец Чили, черри, базилик</div>
+          <div class="pizza-weight">550 г</div>
+          <div class="pizza-price">950 ₽</div>
+        </div>
+        <div class="pizza-card stagger-animate">
+          <img src="Салями.jpg" alt="Пицца Салями" class="pizza-image" loading="lazy" />
+          <div class="pizza-title">Пицца Салями 32 см</div>
+          <div class="pizza-desc">Неаполитанский соус, сыр моцарелла, колбаса салями, помидоры черри</div>
+          <div class="pizza-weight">500 г</div>
+          <div class="pizza-price">700 ₽</div>
+        </div>
+        <div class="pizza-card stagger-animate">
+          <img src="Четыре сыра.jpg" alt="Пицца Четыре сыра" class="pizza-image" loading="lazy" />
+          <div class="pizza-title">Пицца Четыре сыра 32 см</div>
+          <div class="pizza-desc">Соус Неаполитанский, моцарелла, пармезан, чеддер, дор блю, черри</div>
+          <div class="pizza-weight">500 г</div>
+          <div class="pizza-price">750 ₽</div>
+        </div>
+        <div class="pizza-card stagger-animate">
+          <img src="гавайская.jpg" alt="Пицца Гавайская" class="pizza-image" loading="lazy" />
+          <div class="pizza-title">Пицца Гавайская 32 см</div>
+          <div class="pizza-desc">Соус Неаполитанский, моцарелла, ананас, бедро куриное, ветчина, базилик, бальзамический крем</div>
+          <div class="pizza-weight">550 г</div>
+          <div class="pizza-price">800 ₽</div>
+        </div>
+        <div class="pizza-card stagger-animate">
+          <img src="Жульен.jpg" alt="Пицца Жульен" class="pizza-image" loading="lazy" />
+          <div class="pizza-title">Пицца Жульен 32 см</div>
+          <div class="pizza-desc">Соус бешамель, моцарелла, шампиньоны, бедро курицы, пармезан, базилик</div>
+          <div class="pizza-weight">550 г</div>
+          <div class="pizza-price">850 ₽</div>
+        </div>
+        <div class="pizza-card stagger-animate">
+          <img src="Мясная.jpg" alt="Пицца Мясная" class="pizza-image" loading="lazy" />
+          <div class="pizza-title">Пицца Мясная 32 см</div>
+          <div class="pizza-desc">Соус Неаполитанский, моцарелла, бекон, ветчина, бедро куриное, колбаски охотничьи, пепперони, базилик</div>
+          <div class="pizza-weight">500 г</div>
+          <div class="pizza-price">850 ₽</div>
+        </div>
+        <div class="pizza-card stagger-animate">
+          <img src="Карбонара.jpg" alt="Пицца Карбонара" class="pizza-image" loading="lazy" />
+          <div class="pizza-title">Пицца Карбонара 32 см</div>
+          <div class="pizza-desc">Соус бешамель, моцарелла, бекон, пармезан, яйцо, базилик</div>
+          <div class="pizza-weight">500 г</div>
+          <div class="pizza-price">850 ₽</div>
+        </div>
+        <div class="pizza-card stagger-animate">
+          <img src="Бази.jpg" alt="Пицца Бази" class="pizza-image" loading="lazy" />
+          <div class="pizza-title">Пицца «Бази» 32 см</div>
+          <div class="pizza-desc">Фокачча, соус бешамель, моцарелла, теплый салат бази, черри, песто, базилик</div>
+          <div class="pizza-weight">500 г</div>
+          <div class="pizza-price">950 ₽</div>
+        </div>
+        <div class="pizza-card stagger-animate">
+          <img src="Барбекю.jpg" alt="Пицца Барбекю" class="pizza-image" loading="lazy" />
+          <div class="pizza-title">Пицца Барбекю 32 см</div>
+          <div class="pizza-desc">Соус Неаполитанский, моцарелла, мясо барбекю, бекон, черри, базилик</div>
+          <div class="pizza-weight">500 г</div>
+          <div class="pizza-price">850 ₽</div>
+        </div>
+      </div>
+      <div class="desc" style="margin-top:32px; font-size:1.15rem; opacity:0.92;">
+        С полным ассортиментом вы можете ознакомиться на сайте доставки Яндекс Еда или Деливери Клаб
+      </div>
+      <div class="section-title" style="margin-top:40px;">Кофе и напитки</div>
+      <div class="drinks-menu">
+        <div class="drink-card stagger-animate">
+          <div class="drink-info">
+            <div class="drink-title">Капучино</div>
+            <div class="drink-volume">300 мл</div>
+          </div>
+          <div class="drink-price">300 ₽</div>
+        </div>
+        <div class="drink-card stagger-animate">
+          <div class="drink-info">
+            <div class="drink-title">Чай</div>
+            <div class="drink-volume">700 мл</div>
+          </div>
+          <div class="drink-price">350 ₽</div>
+        </div>
+        <div class="drink-card stagger-animate">
+          <div class="drink-info">
+            <div class="drink-title">Чай Молочный Улун</div>
+            <div class="drink-volume">700 мл</div>
+          </div>
+          <div class="drink-price">400 ₽</div>
+        </div>
+        <div class="drink-card stagger-animate">
+          <div class="drink-info">
+            <div class="drink-title">Чай фруктовый</div>
+            <div class="drink-volume">700 мл</div>
+          </div>
+          <div class="drink-price">400 ₽</div>
+        </div>
+        <div class="drink-card stagger-animate">
+          <div class="drink-info">
+            <div class="drink-title">Чай с собой</div>
+            <div class="drink-volume">300 мл</div>
+          </div>
+          <div class="drink-price">100 ₽</div>
+        </div>
+        <div class="drink-card stagger-animate">
+          <div class="drink-info">
+            <div class="drink-title">Вода "Байкал" б/г</div>
+            <div class="drink-volume">450 мл</div>
+          </div>
+          <div class="drink-price">100 ₽</div>
+        </div>
+        <div class="drink-card stagger-animate">
+          <div class="drink-info">
+            <div class="drink-title">Латте</div>
+            <div class="drink-volume">300 мл</div>
+          </div>
+          <div class="drink-price">300 ₽</div>
+        </div>
+        <div class="drink-card stagger-animate">
+          <div class="drink-info">
+            <div class="drink-title">Эспрессо</div>
+            <div class="drink-volume">40 мл</div>
+          </div>
+          <div class="drink-price">140 ₽</div>
+        </div>
+        <div class="drink-card stagger-animate">
+          <div class="drink-info">
+            <div class="drink-title">Капучино</div>
+            <div class="drink-volume">200 мл</div>
+          </div>
+          <div class="drink-price">200 ₽</div>
+        </div>
+        <div class="drink-card stagger-animate">
+          <div class="drink-info">
+            <div class="drink-title">Фанта</div>
+            <div class="drink-volume">300 мл</div>
+          </div>
+          <div class="drink-price">130 ₽</div>
+        </div>
+        <div class="drink-card stagger-animate">
+          <div class="drink-info">
+            <div class="drink-title">Чай зеленый жасминовый</div>
+            <div class="drink-desc">Ароматный зеленый жасминовый чай с бутонами жасмина.</div>
+            <div class="drink-volume">700 мл</div>
+          </div>
+          <div class="drink-price">400 ₽</div>
+        </div>
+        <div class="drink-card stagger-animate">
+          <div class="drink-info">
+            <div class="drink-title">Апельсиновый фреш</div>
+            <div class="drink-volume">200 мл</div>
+          </div>
+          <div class="drink-price">280 ₽</div>
+        </div>
+        <div class="drink-card stagger-animate">
+          <div class="drink-info">
+            <div class="drink-title">Апельсиновый фреш</div>
+            <div class="drink-volume">300 мл</div>
+          </div>
+          <div class="drink-price">340 ₽</div>
+        </div>
+        <div class="drink-card stagger-animate">
+          <div class="drink-info">
+            <div class="drink-title">Айс</div>
+            <div class="drink-volume">400 мл</div>
+          </div>
+          <div class="drink-price">250 ₽</div>
+        </div>
+        <div class="drink-card stagger-animate">
+          <div class="drink-info">
+            <div class="drink-title">Американо</div>
+            <div class="drink-volume">200 мл</div>
+          </div>
+          <div class="drink-price">170 ₽</div>
+        </div>
+        <div class="drink-card stagger-animate">
+          <div class="drink-info">
+            <div class="drink-title">Американо</div>
+            <div class="drink-volume">300 мл</div>
+          </div>
+          <div class="drink-price">240 ₽</div>
+        </div>
+        <div class="drink-card stagger-animate">
+          <div class="drink-info">
+            <div class="drink-title">Раф</div>
+            <div class="drink-volume">300 мл</div>
+          </div>
+          <div class="drink-price">370 ₽</div>
+        </div>
+        <div class="drink-card stagger-animate">
+          <div class="drink-info">
+            <div class="drink-title">Горячий шоколад</div>
+            <div class="drink-volume">200 мл</div>
+          </div>
+          <div class="drink-price">300 ₽</div>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-section">
+      <div class="gallery-title">Атмосфера нашего кафе</div>
+      <div class="gallery-row">
+        <img src="XXXL (1).webp" alt="Интерьер кафе Бази 1" class="gallery-img stagger-animate" loading="lazy" />
+        <img src="XXXL (2).webp" alt="Интерьер кафе Бази 2" class="gallery-img stagger-animate" loading="lazy" />
+      </div>
+    </div>
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" id="lightboxClose">×</button>
+      <img src="" alt="Фото кафе Бази" class="lightbox-img" id="lightboxImg" />
+    </div>
+    
+    <div class="container" id="contacts">
+      <div class="section-title">Контакты</div>
+      <div class="desc">Свяжитесь с нами любым удобным способом. Мы всегда рады ответить на ваши вопросы!</div>
+      <div class="info-list">
+        <div class="info-item">
+          <b>Телефон:</b><br>
+          <a href="tel:+79055561050" style="color: var(--main-brown); text-decoration: none;">8 905 556 10 50</a>
+        </div>
+        <div class="info-item">
+          <b>WhatsApp:</b><br>
+          <a href="https://wa.me/79055561050" target="_blank" style="color: var(--main-brown); text-decoration: none;">Написать в WhatsApp</a>
+        </div>
+        <div class="info-item">
+          <b>Адрес:</b><br>
+          Москва, ул. Расковой, 12
+        </div>
+        <div class="info-item">
+          <b>Время работы:</b><br>
+          8:00 – 22:00
+        </div>
+      </div>
+      <div class="desc" style="margin-top:32px; font-size:1.15rem; opacity:0.92;">
+        Приходите к нам в гости или заказывайте доставку через популярные сервисы. Мы ждём вас каждый день с 8 утра до 10 вечера!
+      </div>
+    </div>
+    
+    <div class="container" id="delivery">
+      <div class="section-title">Доставка</div>
+      <div class="desc">Заказывайте нашу вкусную пиццу с доставкой на дом или в офис через популярные сервисы.</div>
+      <div class="info-list">
+        <div class="info-item">
+          <b>Яндекс Еда</b><br>
+          <a href="https://eda.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" style="color: var(--main-brown); text-decoration: none;">Заказать через Яндекс Еду</a>
+        </div>
+        <div class="info-item">
+          <b>Деливери Клаб</b><br>
+          <a href="https://market-delivery.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" style="color: var(--main-brown); text-decoration: none;">Заказать через Деливери Клаб</a>
+        </div>
+        <div class="info-item">
+          <b>Самовывоз</b><br>
+          Забирайте заказ сами по адресу: Москва, ул. Расковой, 12
+        </div>
+        <div class="info-item">
+          <b>Время доставки</b><br>
+          Обычно 30-45 минут в зависимости от загруженности
+        </div>
+      </div>
+      <div class="desc" style="margin-top:32px; font-size:1.15rem; opacity:0.92;">
+        Наша пицца доставляется в специальных термобоксах, чтобы сохранить тепло и вкус. Минимальная сумма заказа может варьироваться в зависимости от сервиса доставки.
+      </div>
+    </div>
+  </main>
+      <div class="fixed-contacts">
+      <div class="contacts-box">
+        <div><b>Тел.:</b> <a href="tel:+79055561050">8 905 556 10 50</a> <a href="https://wa.me/79055561050" target="_blank">WhatsApp</a></div>
+        <div style="font-size:0.97em; opacity:0.8;">Москва, ул. Расковой, 12</div>
+        <div class="worktime"><b>Время работы:</b> 8:00 – 22:00</div>
+      </div>
+      <div class="delivery-links">
+        <a href="https://eda.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank">Яндекс Еда</a>
+        <a href="https://market-delivery.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank">Деливери Клаб</a>
+      </div>
+    </div>
+    
+    <div class="reviews-section section-animate">
+      <div class="reviews-title">Отзывы наших гостей</div>
+      <div class="reviews-grid">
+        <div class="review-card stagger-animate">
+          <div class="review-text">
+            Побывала в Бази, и не разочаровалась<br><br>
+            1. Еда на высшем уровне по демократичной цене<br>
+            2. Брала кофе, очень вкусный, техника приготовления и сами зерна на высшем уровне<br>
+            3. Атмосфера в заведение расслабляющая, не шумно, а музыка порадовала<br>
+            4. Персонал приветливый, когда уходила, сказали «приходите еще»<br>
+            5. Очень чисто, видно, что за этим строго следят
+          </div>
+          <div class="review-rating">
+            <div class="stars">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+            </div>
+            <span class="rating-text">5.0/5.0</span>
+          </div>
+        </div>
+        
+        <div class="review-card stagger-animate">
+          <div class="review-text">
+            Очень уютное местечко. Приятный хозяин. Видно, что человек вложил часть души в свое дело. Заходишь и тебя обволакивает тепло, тихая музыка и аромат кофе. Продуманный с изюминкой ремонт. Спасибо за островок, где можно спокойно попить кофе!
+          </div>
+          <div class="review-rating">
+            <div class="stars">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+            </div>
+            <span class="rating-text">5.0/5.0</span>
+          </div>
+        </div>
+        
+        <div class="review-card stagger-animate">
+          <div class="review-text">
+            Безумно приятное место!<br><br>
+            Очень дружелюбный персонал! Пицца восхитительная, сочная, вкусная, а сыр так прям и тает во рту, тесто просто самое мягкое и вкусное, которое я пробовала в Москве! Рекомендую, однозначно! Буду приходить часто, так как совсем рядом, в соседнем здании, хожу к врачу.
+          </div>
+          <div class="review-rating">
+            <div class="stars">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+            </div>
+            <span class="rating-text">5.0/5.0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="fixed-quote">
+      Каждый гость — особенный, и мы постараемся сделать ваш визит незабываемым!
+    </div>
+    
+    <div class="footer">
+      &copy; 2024 Бази — уютная пиццерия. Все права защищены.
+    </div>
+  </body>
+</html> 
