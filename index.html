@@ -164,12 +164,11 @@
       color: #fff;
       transform: scale(1.07);
     }
-    .container {
+    .container, .gallery-section, .reviews-section, .welcome-content {
+      border: 2px solid #e0c7b0;
+      box-shadow: 0 0 0 4px rgba(224,199,176,0.10), 0 8px 48px rgba(45,35,32,0.22);
       max-width: 900px;
       margin: 40px auto 0 auto;
-      background: linear-gradient(135deg, #23382d 60%, #2e4a3a 100%);
-      border-radius: 32px;
-      box-shadow: 0 8px 48px rgba(45,35,32,0.22);
       padding: 32px 24px 24px 24px;
       opacity: 0;
       transform: translateY(40px);
@@ -179,7 +178,13 @@
       z-index: 2;
       overflow: hidden;
     }
-    .container::before {
+    @media (max-width: 700px) {
+      .container, .gallery-section, .reviews-section, .welcome-content {
+        border-width: 1.2px;
+        box-shadow: 0 0 0 2.5px rgba(224,199,176,0.13), 0 4px 24px rgba(45,35,32,0.18);
+      }
+    }
+    .container::before, .gallery-section::before, .reviews-section::before, .welcome-content::before {
       content: '';
       position: absolute;
       inset: 0;
@@ -492,9 +497,32 @@
       text-align: right;
     }
     @media (max-width: 700px) {
-      .fixed-contacts { right: 4px; top: 4px; }
-      .fixed-contacts .contacts-box { min-width: 140px; font-size: 0.93rem; padding: 8px 8px 6px 8px; }
-      .fixed-contacts .delivery-links a { padding: 6px 8px; font-size: 0.93rem; }
+      .fixed-contacts {
+        position: static;
+        margin: 12px auto 0 auto;
+        width: 98vw;
+        max-width: 420px;
+        left: unset;
+        right: unset;
+        top: unset;
+        z-index: 2;
+      }
+      .fixed-contacts .contacts-box {
+        min-width: unset;
+        width: 100%;
+        font-size: 0.93rem;
+        padding: 8px 8px 6px 8px;
+        margin-bottom: 4px;
+        box-sizing: border-box;
+      }
+      .fixed-contacts .delivery-links {
+        justify-content: flex-start;
+        gap: 6px;
+      }
+      .fixed-contacts .delivery-links a {
+        padding: 6px 8px;
+        font-size: 0.93rem;
+      }
     }
     
     /* Закрепленная надпись в правом нижнем углу */
@@ -654,9 +682,9 @@
       background: linear-gradient(135deg, #23382d 60%, #2e4a3a 100%);
       border-radius: 32px;
       box-shadow: 0 8px 48px rgba(45,35,32,0.22);
-      padding: 32px 38px 28px 38px;
-      max-width: 700px;
-      margin: 10px auto 0 auto;
+      padding: 32px 24px 24px 24px;
+      max-width: 900px;
+      margin: 40px auto 0 auto;
       color: #f5e9e0;
       text-align: center;
       font-size: 1.13rem;
@@ -702,7 +730,7 @@
       text-shadow: 0 1px 8px #2d2320;
     }
     @media (max-width: 700px) {
-      .welcome-content { padding: 18px 6px 16px 6px; font-size: 1.01rem; border-radius: 16px; }
+      .welcome-content { padding: 16px 4px; font-size: 1.01rem; border-radius: 16px; margin: 24px auto 0 auto; }
       .welcome-content::before { border-radius: 16px; }
       .welcome-title { font-size: 1.25rem; }
     }
@@ -1335,6 +1363,8 @@
       <div class="gallery-row">
         <img src="XXXL (1).webp" alt="Интерьер кафе Бази 1" class="gallery-img stagger-animate" loading="lazy" />
         <img src="XXXL (2).webp" alt="Интерьер кафе Бази 2" class="gallery-img stagger-animate" loading="lazy" />
+        <img src="XXXL (3).webp" alt="Уютный зал кафе Бази" class="gallery-img stagger-animate" loading="lazy" />
+        <img src="XXXL (4).webp" alt="Детали интерьера Бази" class="gallery-img stagger-animate" loading="lazy" />
       </div>
     </div>
     <!-- Lightbox -->
