@@ -24,6 +24,7 @@
       color: #f5e9e0;
       scroll-behavior: smooth;
       transition: background 0.7s;
+      padding-top: 60px;
     }
     body::before {
       content: '';
@@ -78,7 +79,7 @@
       left: 0;
       width: 100vw;
       background: rgba(45,35,32,0.72);
-      z-index: 1000;
+      z-index: 9999;
       box-shadow: 0 2px 12px rgba(45,35,32,0.10);
       display: flex;
       justify-content: center;
@@ -86,10 +87,14 @@
       height: 60px;
       transition: background 0.3s;
       backdrop-filter: blur(6px);
+      pointer-events: auto;
     }
     .fixed-nav nav {
       margin: 0;
       gap: 0;
+      position: relative;
+      z-index: 10001;
+      pointer-events: auto;
     }
     .fixed-nav nav a {
       background: none;
@@ -104,6 +109,10 @@
       transition: color 0.2s, border-bottom 0.2s, background 0.2s;
       position: relative;
       text-shadow: 0 1px 0 #2d2320;
+      text-decoration: none;
+      cursor: pointer;
+      pointer-events: auto;
+      z-index: 10000;
     }
     .fixed-nav nav a:hover,
     .fixed-nav nav a.active {
@@ -315,6 +324,19 @@
       justify-content: center;
       margin-top: 24px;
     }
+    
+    @media (max-width: 700px) {
+      .pizza-menu {
+        gap: 16px;
+        justify-content: space-between;
+      }
+      
+      .pizza-card {
+        min-width: calc(50% - 8px);
+        max-width: calc(50% - 8px);
+        flex: 0 0 calc(50% - 8px);
+      }
+    }
     .pizza-card {
       background: linear-gradient(120deg, #4e3a2a 60%, #a97c50 100%);
       border-radius: 16px;
@@ -367,6 +389,33 @@
       color: #fff;
       margin-bottom: 0;
       text-shadow: 0 1px 8px #2d2320;
+    }
+    
+    .pizza-delivery-buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    
+    .delivery-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: transform 0.2s;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    
+    .delivery-btn:hover {
+      transform: scale(1.1);
+    }
+    
+    .delivery-btn img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      border-radius: 6px;
     }
     
     /* Стили для карточек напитков */
@@ -436,7 +485,7 @@
     }
     .fixed-contacts {
       position: fixed;
-      top: 16px;
+      top: 80px;
       right: 24px;
       z-index: 1200;
       display: flex;
@@ -483,6 +532,16 @@
       transition: background 0.2s, color 0.2s, transform 0.18s;
       display: flex;
       align-items: center;
+      gap: 8px;
+    }
+    
+    .fixed-contacts .delivery-links a img {
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      padding: 2px;
     }
     .fixed-contacts .delivery-links a:hover {
       background: #fff;
@@ -522,6 +581,39 @@
       .fixed-contacts .delivery-links a {
         padding: 6px 8px;
         font-size: 0.93rem;
+      }
+      
+      .mobile-delivery-buttons {
+        display: none;
+      }
+      
+      @media (max-width: 700px) {
+        .mobile-delivery-buttons {
+          position: fixed;
+          top: 8px;
+          right: 8px;
+          z-index: 10002;
+          display: flex;
+          gap: 6px;
+        }
+      }
+      
+      .mobile-delivery-buttons .delivery-btn {
+        width: 28px;
+        height: 28px;
+        background: rgba(45,35,32,0.9);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(224,199,176,0.3);
+      }
+      
+      .mobile-delivery-buttons .delivery-btn img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
       }
     }
     
@@ -746,8 +838,8 @@
       position: relative;
     }
     .site-logo {
-      max-width: 240px;
-      max-height: 180px;
+      max-width: 480px;
+      max-height: 360px;
       width: auto;
       height: auto;
       object-fit: contain;
@@ -861,7 +953,7 @@
     @media (max-width: 700px) {
       .hero-title { font-size: 1.3rem; }
       .hero-banner { min-height: 220px; }
-      .hero-logo { max-width: 180px; }
+      .hero-logo { max-width: 360px; }
     }
 
     /* --- Lightbox галереи --- */
@@ -1117,6 +1209,15 @@
       <a href="#delivery" onclick="console.log('Клик по Доставка');">Доставка</a>
     </nav>
   </div>
+  
+  <div class="mobile-delivery-buttons">
+    <a href="https://eda.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+      <img src="Yandex.webp" alt="Заказать в Яндекс Еда" />
+    </a>
+    <a href="https://market-delivery.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+      <img src="dilivery.png" alt="Заказать в Деливери Клаб" />
+    </a>
+  </div>
           <div class="logo-bar">
             <img src="51cceaf5-e774-43be-b47d-a4b329fa22333bd6.png" alt="Логотип Бази" class="site-logo" />
         </div>
@@ -1159,6 +1260,14 @@
           <div class="pizza-desc">Соус Неаполитанский, сыр моцарелла, колбаса пепперони, помидоры черри</div>
           <div class="pizza-weight">550 г</div>
           <div class="pizza-price">700 ₽</div>
+          <div class="pizza-delivery-buttons">
+            <a href="https://eda.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="Yandex.webp" alt="Заказать в Яндекс Еда" />
+            </a>
+            <a href="https://market-delivery.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="dilivery.png" alt="Заказать в Деливери Клаб" />
+            </a>
+          </div>
         </div>
         <div class="pizza-card stagger-animate">
           <img src="Дьябло острая.jpg" alt="Пицца Диабло (острая)" class="pizza-image" loading="lazy" />
@@ -1166,6 +1275,14 @@
           <div class="pizza-desc">Соус Неаполитанский, моцарелла, бекон, перец халопеньо, колбаски охотничьи, пепперони, фасоль красная, красный лук, перец Чили, черри, базилик</div>
           <div class="pizza-weight">550 г</div>
           <div class="pizza-price">950 ₽</div>
+          <div class="pizza-delivery-buttons">
+            <a href="https://eda.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="Yandex.webp" alt="Заказать в Яндекс Еда" />
+            </a>
+            <a href="https://market-delivery.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="dilivery.png" alt="Заказать в Деливери Клаб" />
+            </a>
+          </div>
         </div>
         <div class="pizza-card stagger-animate">
           <img src="Салями.jpg" alt="Пицца Салями" class="pizza-image" loading="lazy" />
@@ -1173,6 +1290,14 @@
           <div class="pizza-desc">Неаполитанский соус, сыр моцарелла, колбаса салями, помидоры черри</div>
           <div class="pizza-weight">500 г</div>
           <div class="pizza-price">700 ₽</div>
+          <div class="pizza-delivery-buttons">
+            <a href="https://eda.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="Yandex.webp" alt="Заказать в Яндекс Еда" />
+            </a>
+            <a href="https://market-delivery.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="dilivery.png" alt="Заказать в Деливери Клаб" />
+            </a>
+          </div>
         </div>
         <div class="pizza-card stagger-animate">
           <img src="Четыре сыра.jpg" alt="Пицца Четыре сыра" class="pizza-image" loading="lazy" />
@@ -1180,6 +1305,14 @@
           <div class="pizza-desc">Соус Неаполитанский, моцарелла, пармезан, чеддер, дор блю, черри</div>
           <div class="pizza-weight">500 г</div>
           <div class="pizza-price">750 ₽</div>
+          <div class="pizza-delivery-buttons">
+            <a href="https://eda.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="Yandex.webp" alt="Заказать в Яндекс Еда" />
+            </a>
+            <a href="https://market-delivery.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="dilivery.png" alt="Заказать в Деливери Клаб" />
+            </a>
+          </div>
         </div>
         <div class="pizza-card stagger-animate">
           <img src="гавайская.jpg" alt="Пицца Гавайская" class="pizza-image" loading="lazy" />
@@ -1187,6 +1320,14 @@
           <div class="pizza-desc">Соус Неаполитанский, моцарелла, ананас, бедро куриное, ветчина, базилик, бальзамический крем</div>
           <div class="pizza-weight">550 г</div>
           <div class="pizza-price">800 ₽</div>
+          <div class="pizza-delivery-buttons">
+            <a href="https://eda.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="Yandex.webp" alt="Заказать в Яндекс Еда" />
+            </a>
+            <a href="https://market-delivery.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="dilivery.png" alt="Заказать в Деливери Клаб" />
+            </a>
+          </div>
         </div>
         <div class="pizza-card stagger-animate">
           <img src="Жульен.jpg" alt="Пицца Жульен" class="pizza-image" loading="lazy" />
@@ -1194,6 +1335,14 @@
           <div class="pizza-desc">Соус бешамель, моцарелла, шампиньоны, бедро курицы, пармезан, базилик</div>
           <div class="pizza-weight">550 г</div>
           <div class="pizza-price">850 ₽</div>
+          <div class="pizza-delivery-buttons">
+            <a href="https://eda.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="Yandex.webp" alt="Заказать в Яндекс Еда" />
+            </a>
+            <a href="https://market-delivery.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="dilivery.png" alt="Заказать в Деливери Клаб" />
+            </a>
+          </div>
         </div>
         <div class="pizza-card stagger-animate">
           <img src="Мясная.jpg" alt="Пицца Мясная" class="pizza-image" loading="lazy" />
@@ -1201,6 +1350,14 @@
           <div class="pizza-desc">Соус Неаполитанский, моцарелла, бекон, ветчина, бедро куриное, колбаски охотничьи, пепперони, базилик</div>
           <div class="pizza-weight">500 г</div>
           <div class="pizza-price">850 ₽</div>
+          <div class="pizza-delivery-buttons">
+            <a href="https://eda.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="Yandex.webp" alt="Заказать в Яндекс Еда" />
+            </a>
+            <a href="https://market-delivery.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="dilivery.png" alt="Заказать в Деливери Клаб" />
+            </a>
+          </div>
         </div>
         <div class="pizza-card stagger-animate">
           <img src="Карбонара.jpg" alt="Пицца Карбонара" class="pizza-image" loading="lazy" />
@@ -1208,6 +1365,14 @@
           <div class="pizza-desc">Соус бешамель, моцарелла, бекон, пармезан, яйцо, базилик</div>
           <div class="pizza-weight">500 г</div>
           <div class="pizza-price">850 ₽</div>
+          <div class="pizza-delivery-buttons">
+            <a href="https://eda.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="Yandex.webp" alt="Заказать в Яндекс Еда" />
+            </a>
+            <a href="https://market-delivery.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="dilivery.png" alt="Заказать в Деливери Клаб" />
+            </a>
+          </div>
         </div>
         <div class="pizza-card stagger-animate">
           <img src="Бази.jpg" alt="Пицца Бази" class="pizza-image" loading="lazy" />
@@ -1215,6 +1380,14 @@
           <div class="pizza-desc">Фокачча, соус бешамель, моцарелла, теплый салат бази, черри, песто, базилик</div>
           <div class="pizza-weight">500 г</div>
           <div class="pizza-price">950 ₽</div>
+          <div class="pizza-delivery-buttons">
+            <a href="https://eda.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="Yandex.webp" alt="Заказать в Яндекс Еда" />
+            </a>
+            <a href="https://market-delivery.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="dilivery.png" alt="Заказать в Деливери Клаб" />
+            </a>
+          </div>
         </div>
         <div class="pizza-card stagger-animate">
           <img src="Барбекю.jpg" alt="Пицца Барбекю" class="pizza-image" loading="lazy" />
@@ -1222,6 +1395,59 @@
           <div class="pizza-desc">Соус Неаполитанский, моцарелла, мясо барбекю, бекон, черри, базилик</div>
           <div class="pizza-weight">500 г</div>
           <div class="pizza-price">850 ₽</div>
+          <div class="pizza-delivery-buttons">
+            <a href="https://eda.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="Yandex.webp" alt="Заказать в Яндекс Еда" />
+            </a>
+            <a href="https://market-delivery.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="dilivery.png" alt="Заказать в Деливери Клаб" />
+            </a>
+          </div>
+        </div>
+        <div class="pizza-card stagger-animate">
+          <img src="ветчина грибы.jpg" alt="Пицца Ветчина-грибы" class="pizza-image" loading="lazy" />
+          <div class="pizza-title">Пицца Ветчина-грибы 32 см</div>
+          <div class="pizza-desc">Соус Неаполитанский, моцарелла, ветчина, шампиньоны, черри, базилик</div>
+          <div class="pizza-weight">500 г</div>
+          <div class="pizza-price">900 ₽</div>
+          <div class="pizza-delivery-buttons">
+            <a href="https://eda.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="Yandex.webp" alt="Заказать в Яндекс Еда" />
+            </a>
+            <a href="https://market-delivery.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="dilivery.png" alt="Заказать в Деливери Клаб" />
+            </a>
+          </div>
+        </div>
+        <div class="pizza-card stagger-animate">
+          <img src="сальчичон.jpg" alt="Пицца Сальчичон" class="pizza-image" loading="lazy" />
+          <div class="pizza-title">Пицца Сальчичон 32 см</div>
+          <div class="pizza-desc">Соус Неаполитанский, моцарелла, сальчичон, черри, базилик</div>
+          <div class="pizza-weight">550 г</div>
+          <div class="pizza-price">900 ₽</div>
+          <div class="pizza-delivery-buttons">
+            <a href="https://eda.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="Yandex.webp" alt="Заказать в Яндекс Еда" />
+            </a>
+            <a href="https://market-delivery.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="dilivery.png" alt="Заказать в Деливери Клаб" />
+            </a>
+          </div>
+        </div>
+        <div class="pizza-card stagger-animate">
+          <img src="маргарита.jpg" alt="Пицца Маргарита" class="pizza-image" loading="lazy" />
+          <div class="pizza-title">Пицца Маргарита 32 см</div>
+          <div class="pizza-desc">Соус Неаполитанский, моцарелла, черри, базилик</div>
+          <div class="pizza-weight">500 г</div>
+          <div class="pizza-price">720 ₽</div>
+          <div class="pizza-delivery-buttons">
+            <a href="https://eda.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="Yandex.webp" alt="Заказать в Яндекс Еда" />
+            </a>
+            <a href="https://market-delivery.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
+              <img src="dilivery.png" alt="Заказать в Деливери Клаб" />
+            </a>
+          </div>
         </div>
       </div>
       <div class="desc" style="margin-top:32px; font-size:1.15rem; opacity:0.92;">
@@ -1432,8 +1658,14 @@
         <div class="worktime"><b>Время работы:</b> 8:00 – 22:00</div>
       </div>
       <div class="delivery-links">
-        <a href="https://eda.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank">Яндекс Еда</a>
-        <a href="https://market-delivery.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank">Деливери Клаб</a>
+        <a href="https://eda.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank">
+          <img src="Yandex.webp" alt="Яндекс Еда" />
+          Яндекс Еда
+        </a>
+        <a href="https://market-delivery.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank">
+          <img src="dilivery.png" alt="Деливери Клаб" />
+          Деливери Клаб
+        </a>
       </div>
     </div>
     
@@ -1501,7 +1733,7 @@
     </div>
     
     <div class="footer">
-      &copy; 2024 Бази — уютная пиццерия. Все права защищены.
+      &copy; 2025 Бази — уютная пиццерия. Все права защищены.
     </div>
   </body>
 </html> 
