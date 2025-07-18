@@ -327,14 +327,32 @@
     
     @media (max-width: 700px) {
       .pizza-menu {
-        gap: 16px;
-        justify-content: space-between;
+        gap: 12px;
+        justify-content: center;
+        padding: 0 8px;
       }
       
       .pizza-card {
-        min-width: calc(50% - 8px);
-        max-width: calc(50% - 8px);
-        flex: 0 0 calc(50% - 8px);
+        min-width: calc(50% - 6px);
+        max-width: calc(50% - 6px);
+        flex: 0 0 calc(50% - 6px);
+        padding: 16px 12px 12px 12px;
+      }
+      
+      .pizza-image {
+        height: 100px;
+      }
+      
+      .pizza-title {
+        font-size: 1rem;
+      }
+      
+      .pizza-desc {
+        font-size: 0.9rem;
+      }
+      
+      .pizza-price {
+        font-size: 1rem;
       }
     }
     .pizza-card {
@@ -557,30 +575,7 @@
     }
     @media (max-width: 700px) {
       .fixed-contacts {
-        position: static;
-        margin: 12px auto 0 auto;
-        width: 98vw;
-        max-width: 420px;
-        left: unset;
-        right: unset;
-        top: unset;
-        z-index: 2;
-      }
-      .fixed-contacts .contacts-box {
-        min-width: unset;
-        width: 100%;
-        font-size: 0.93rem;
-        padding: 8px 8px 6px 8px;
-        margin-bottom: 4px;
-        box-sizing: border-box;
-      }
-      .fixed-contacts .delivery-links {
-        justify-content: flex-start;
-        gap: 6px;
-      }
-      .fixed-contacts .delivery-links a {
-        padding: 6px 8px;
-        font-size: 0.93rem;
+        display: none;
       }
       
       .mobile-delivery-buttons {
