@@ -1362,45 +1362,90 @@
         }, 700);
       }, 1700); // Время показа прелоадера (мс)
     });
-    // Плавная подсветка активной кнопки меню при скролле
+    // Простая и надежная навигация
     document.addEventListener('DOMContentLoaded', function() {
-      const navLinks = document.querySelectorAll('.fixed-nav nav a');
-      const sections = Array.from(navLinks).map(link => document.querySelector(link.getAttribute('href')));
+      // Находим все ссылки навигации
+      const navLinks = document.querySelectorAll('.nav-link');
       
-      console.log('Найдено ссылок навигации:', navLinks.length);
-      console.log('Найдено секций:', sections.length);
+      // Определяем порядок секций для правильной подсветки
+      const sections = [
+        { id: 'about', element: document.getElementById('about') },
+        { id: 'menu', element: document.getElementById('menu') },
+        { id: 'delivery', element: document.getElementById('delivery') }
+      ];
       
-      // Плавный скролл при клике
-      navLinks.forEach((link, index) => {
+      // Обработчик для каждой ссылки
+      navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
           e.preventDefault();
-          console.log('Клик по ссылке:', this.getAttribute('href'));
-          const target = document.querySelector(this.getAttribute('href'));
-          if (target) {
-            console.log('Найдена цель для скролла:', target.id);
-            window.scrollTo({ top: target.offsetTop - 55, behavior: 'smooth' });
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+          
+          const targetId = this.getAttribute('data-target');
+          
+          // Находим секцию
+          const targetSection = document.getElementById(targetId);
+          
+          if (targetSection) {
+            // Убираем активный класс со всех ссылок
+            navLinks.forEach(l => l.classList.remove('active'));
+            // Добавляем активный класс к текущей ссылке
+            this.classList.add('active');
+            
+            // Прокручиваем к секции
+            const navHeight = 80;
+            const offsetTop = targetSection.offsetTop - navHeight;
+            
+            // Принудительная прокрутка
+            window.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
+            });
+            
+
+            
           } else {
-            console.log('Цель не найдена:', this.getAttribute('href'));
+            // Fallback - обычная навигация
+            window.location.href = '#' + targetId;
           }
-        });
+          
+          return false;
+        }, true); // Используем capture phase
       });
       
-      function onScroll() {
-        let scrollPos = window.scrollY + 70;
-        let found = false;
+      // Подсветка активной ссылки при скролле
+      function updateActiveNav() {
+        const scrollPos = window.scrollY + 100;
+        let activeSection = null;
+        
+        // Проверяем секции в правильном порядке
         for (let i = sections.length - 1; i >= 0; i--) {
-          if (sections[i] && scrollPos >= sections[i].offsetTop) {
-            navLinks.forEach(l => l.classList.remove('active'));
-            navLinks[i].classList.add('active');
-            found = true;
+          const section = sections[i];
+          if (section.element && scrollPos >= section.element.offsetTop) {
+            activeSection = section.id;
             break;
           }
         }
-        if (!found) navLinks.forEach(l => l.classList.remove('active'));
+        
+        // Обновляем активную ссылку
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('data-target') === activeSection) {
+            link.classList.add('active');
+          }
+        });
       }
-      window.addEventListener('scroll', onScroll);
-      onScroll();
+      
+      // Добавляем обработчик скролла
+      window.addEventListener('scroll', updateActiveNav);
+      
+      // Инициализируем активную ссылку
+      updateActiveNav();
     });
+    
+
+    
+
     // Intersection Observer + scroll effect для выплывания секций
     document.addEventListener('DOMContentLoaded', function() {
       const sections = Array.from(document.querySelectorAll('.container, .gallery-section, .reviews-section'));
@@ -1491,6 +1536,8 @@
       }
     }
     
+
+    
     // Отслеживание кликов по кнопкам доставки
     document.addEventListener('DOMContentLoaded', function() {
       // Яндекс.Еда
@@ -1559,11 +1606,15 @@
   </style>
   <div class="fixed-nav">
     <nav>
-      <a href="#about" onclick="console.log('Клик по О нас');">О нас</a>
-      <a href="#menu" onclick="console.log('Клик по Меню');">Меню</a>
-      <a href="#delivery" onclick="console.log('Клик по Доставка');">Доставка</a>
+      <a href="#about" class="nav-link" data-target="about">О нас</a>
+      <a href="#menu" class="nav-link" data-target="menu">Меню</a>
+      <a href="#delivery" class="nav-link" data-target="delivery">Доставка</a>
     </nav>
   </div>
+  
+
+  
+
   
   <div class="mobile-delivery-buttons">
     <a href="https://eda.yandex.ru/r/bazi?placeSlug=bazi_hq7n6" target="_blank" class="delivery-btn">
@@ -1991,6 +2042,8 @@
       </div>
     </div>
     
+  </main>
+    
     <div class="container" id="delivery" style="margin-top: 40px;">
       <h2 class="section-title">Доставка пиццы</h2>
       <div class="desc">Заказывайте нашу вкусную пиццу с доставкой на дом или в офис через популярные сервисы.</div>
@@ -2016,7 +2069,6 @@
         Наша пицца доставляется в специальных термобоксах, чтобы сохранить тепло и вкус. Минимальная сумма заказа может варьироваться в зависимости от сервиса доставки.
       </div>
     </div>
-  </main>
       <div class="fixed-contacts">
       <div class="contacts-box">
         <div><b>Тел.:</b> <a href="tel:+79055561050">8 905 556 10 50</a> <a href="https://wa.me/79055561050" target="_blank">WhatsApp</a></div>
