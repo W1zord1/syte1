@@ -1204,6 +1204,49 @@
     .gallery-section > * { position: relative; z-index: 1; }
   </style>
   <script>
+    // Защита от копирования
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      return false;
+    });
+    
+    document.addEventListener('selectstart', function(e) {
+      e.preventDefault();
+      return false;
+    });
+    
+    document.addEventListener('dragstart', function(e) {
+      e.preventDefault();
+      return false;
+    });
+    
+    // Отключение клавиш F12, Ctrl+U, Ctrl+S, Ctrl+P
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'F12' || 
+          (e.ctrlKey && e.key === 'u') ||
+          (e.ctrlKey && e.key === 's') ||
+          (e.ctrlKey && e.key === 'p') ||
+          (e.ctrlKey && e.key === 'Shift') ||
+          (e.ctrlKey && e.key === 'I') ||
+          (e.ctrlKey && e.key === 'J') ||
+          (e.ctrlKey && e.key === 'C')) {
+        e.preventDefault();
+        return false;
+      }
+    });
+    
+    // Отключение DevTools через console
+    setInterval(function() {
+      debugger;
+    }, 100);
+    
+    // Предупреждение при попытке копирования
+    document.addEventListener('copy', function(e) {
+      e.preventDefault();
+      alert('Копирование запрещено!');
+      return false;
+    });
+    
     document.addEventListener('DOMContentLoaded', function() {
       console.log('DOM загружен');
       setTimeout(function() {
