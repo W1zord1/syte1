@@ -506,7 +506,7 @@
     h4.pizza-title {
       font-size: 1.1rem;
       font-weight: 700;
-      color: var(--main-brown);
+      color: #ffffff;
       margin: 12px 0 8px 0;
       text-align: center;
       text-shadow: 0 1px 4px rgba(0,0,0,0.8);
@@ -515,7 +515,7 @@
     .drink-title {
       font-size: 0.9rem;
       font-weight: 600;
-      color: var(--main-brown);
+      color: #ffffff;
       margin-bottom: 2px;
       text-shadow: 0 1px 4px rgba(0,0,0,0.8);
     }
@@ -534,19 +534,56 @@
       margin-bottom: 30px;
     }
     .info-item {
-      background: linear-gradient(120deg, #4e3a2a 60%, #a97c50 100%);
+      background: linear-gradient(135deg, #2d2320 0%, #4e3a2a 50%, #6b4f3a 100%);
       border-radius: 14px;
       padding: 18px 24px;
       min-width: 220px;
       text-align: center;
       font-size: 1rem;
-      box-shadow: 0 2px 12px rgba(45,35,32,0.13);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
       opacity: 0;
       transform: scale(0.95);
       animation: fadeInInfo 0.7s forwards;
       animation-delay: 0.7s;
-      color: #f5e9e0;
-      transition: background 0.7s;
+      color: #ffffff;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .info-item:hover {
+      background: linear-gradient(135deg, #3d2f2a 0%, #5e4a3a 50%, #7b5f4a 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+    }
+    
+    .info-item b {
+      color: #ffffff;
+      font-weight: 700;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+    
+    .info-item a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s ease;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+    }
+    
+    .info-item a:hover {
+      color: #ffd700;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+    }
+    
+    .info-item small {
+      color: #e0e0e0;
+      opacity: 0.9;
+      font-size: 0.85rem;
+      display: block;
+      margin-top: 4px;
     }
     .info-item:nth-child(2) { animation-delay: 0.8s; }
     .info-item:nth-child(3) { animation-delay: 0.9s; }
