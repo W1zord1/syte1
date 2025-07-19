@@ -214,6 +214,175 @@
       box-shadow: 0 8px 48px rgba(45,35,32,0.22);
       padding: 24px 0 0 0;
     }
+    
+    /* Стили для секции с постерами коктейлей */
+    .cocktail-posters-section {
+      max-width: 900px;
+      margin: 40px auto 0 auto;
+      background: linear-gradient(135deg, #23382d 60%, #2e4a3a 100%);
+      border: 2px solid #e0c7b0;
+      border-radius: 32px;
+      box-shadow: 0 0 0 4px rgba(224,199,176,0.10), 0 8px 48px rgba(45,35,32,0.22);
+      padding: 32px 24px 24px 24px;
+      position: relative;
+      z-index: 2;
+    }
+    .cocktail-posters-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+      background: url('XXXL.webp') center center/cover no-repeat;
+      filter: brightness(0.45) blur(6px) sepia(0.08) contrast(1.08) saturate(1.1);
+      opacity: 0.38;
+      border-radius: 32px;
+      transition: opacity 0.7s, filter 0.7s;
+    }
+    .cocktail-posters-section > * { position: relative; z-index: 1; }
+    
+    .posters-grid {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+    
+    .poster-card {
+      flex: 1;
+      min-width: 280px;
+      max-width: 320px;
+      height: 400px;
+      background: linear-gradient(120deg, #4e3a2a 60%, #a97c50 100%);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(45,35,32,0.15);
+      padding: 16px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .poster-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(169,124,80,0.25);
+    }
+    
+    .poster-card img {
+      transition: transform 0.3s ease;
+    }
+    
+    .poster-card:hover img {
+      transform: scale(1.05);
+    }
+    
+    .poster-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(169,124,80,0.1), rgba(224,199,176,0.05));
+      border-radius: 16px;
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    .poster-image {
+      width: 100%;
+      height: auto;
+      min-height: 200px;
+      border-radius: 12px;
+      display: block;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+    
+    .poster-card:hover .poster-image {
+      transform: scale(1.05);
+    }
+    
+    .poster-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(45,35,32,0.9));
+      color: #f5e9e0;
+      padding: 20px 16px 16px 16px;
+      border-radius: 0 0 12px 12px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      z-index: 3;
+    }
+    
+    .poster-card:hover .poster-overlay {
+      transform: translateY(0);
+    }
+    
+    .poster-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--main-brown);
+      margin-bottom: 4px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    }
+    
+    .poster-desc {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    }
+    
+    .posters-cta {
+      text-align: center;
+      margin-top: 32px;
+    }
+    
+    .cta-text {
+      color: var(--main-brown);
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-align: center;
+      text-shadow: 0 1px 8px #2d2320;
+      opacity: 0.9;
+    }
+    
+    @media (max-width: 700px) {
+      .cocktail-posters-section {
+        border-radius: 16px;
+        margin: 24px auto 0 auto;
+        padding: 20px 16px 16px 16px;
+        border-width: 1.2px;
+        box-shadow: 0 0 0 2.5px rgba(224,199,176,0.13), 0 4px 24px rgba(45,35,32,0.18);
+      }
+      .cocktail-posters-section::before {
+        border-radius: 16px;
+      }
+      .posters-grid {
+        gap: 16px;
+        margin-top: 20px;
+      }
+      .poster-card {
+        min-width: 240px;
+        max-width: 280px;
+        padding: 12px;
+      }
+      .posters-cta {
+        margin-top: 24px;
+      }
+      .cta-text {
+        font-size: 1rem;
+      }
+    }
+    
     @media (max-width: 700px) {
       .container, .gallery-section { border-radius: 16px; }
       .container, .gallery-section { margin: 24px auto 0 auto; }
@@ -1578,7 +1747,28 @@
           <div class="drink-price">300 ₽</div>
         </div>
       </div>
+      <div class="posters-cta">
+        <div class="cta-text">Приходите в пиццерию и попробуйте наши коктейли!</div>
+      </div>
     </div>
+    
+    <!-- Секция с постерами коктейлей -->
+    <div class="cocktail-posters-section">
+      <div class="section-title">Летние коктейли</div>
+      <div class="desc">Освежающие коктейли для жарких дней. Приходите в пиццерию и попробуйте наши авторские напитки!</div>
+      <div class="posters-grid">
+        <div class="poster-card">
+          <img src="cocktail-poster-1.jpg" alt="Летний коктейль Бази 1" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" />
+        </div>
+        <div class="poster-card">
+          <img src="cocktail-poster-2.jpg" alt="Летний коктейль Бази 2" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" />
+        </div>
+        <div class="poster-card">
+          <img src="cocktail-poster-3.jpg" alt="Летний коктейль Бази 3" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" />
+        </div>
+      </div>
+    </div>
+    
     <div class="gallery-section">
       <div class="gallery-title">Атмосфера нашего кафе</div>
       <div class="gallery-row">
