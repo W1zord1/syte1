@@ -918,6 +918,37 @@
       }
     }
     
+    /* Кнопка закрытия для fixed-quote */
+    .quote-close-btn {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      width: 24px;
+      height: 24px;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--main-brown);
+      border: none;
+      border-radius: 50%;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      transition: all 0.2s ease;
+      z-index: 1001;
+    }
+    
+    .quote-close-btn:hover {
+      background: white;
+      transform: scale(1.1);
+    }
+    
+    .quote-close-btn:active {
+      transform: scale(0.95);
+    }
+    
     /* Стили для отзывов */
     .reviews-section {
       background: linear-gradient(135deg, #23382d 60%, #2e4a3a 100%);
@@ -1572,6 +1603,26 @@
         });
       });
     });
+    
+    // Функция для закрытия fixed-quote
+    function closeQuote() {
+      const quoteElement = document.getElementById('fixedQuote');
+      if (quoteElement) {
+        quoteElement.style.display = 'none';
+        // Сохраняем в localStorage, чтобы окошко не появлялось снова
+        localStorage.setItem('quoteClosed', 'true');
+      }
+    }
+    
+    // Проверяем, было ли окошко закрыто ранее
+    document.addEventListener('DOMContentLoaded', function() {
+      if (localStorage.getItem('quoteClosed') === 'true') {
+        const quoteElement = document.getElementById('fixedQuote');
+        if (quoteElement) {
+          quoteElement.style.display = 'none';
+        }
+      }
+    });
   </script>
 </head>
 <body>
@@ -2151,7 +2202,8 @@
       </div>
     </section>
     
-    <div class="fixed-quote">
+    <div class="fixed-quote" id="fixedQuote">
+      <button class="quote-close-btn" onclick="closeQuote()" aria-label="Закрыть">×</button>
       Каждый гость — особенный, и мы постараемся сделать ваш визит незабываемым!
     </div>
     
